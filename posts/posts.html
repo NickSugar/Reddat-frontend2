@@ -1,0 +1,162 @@
+
+<main>
+
+  <div layout="row">
+    <div flex="10">
+
+    </div>
+    <div layout="row" flex="80">
+      <div layout="row" flex="66">
+        <md-input-container>
+          <label>Filter</label>
+          <input name="filter" ng-model="search.title">
+        </md-input-container>
+
+        <md-input-container>
+
+
+          <md-select ng-model="$ctrl.orderBy" placeholder="Sort by Date" class="md-no-underline">
+            <md-option value="-timeStamp">Sort by Date</md-option>
+            <md-option value="title">Sort by Title</md-option>
+            <md-option value="-props">Sort by Props</md-option>
+          </md-select>
+
+        </md-input-container>
+      </div>
+      <div flex="33">
+        <md-button ng-click="$ctrl.togglePostForm()" class="md-primary">New Post</md-button>
+      </div>
+    </div>
+    <div flex="10">
+
+    </div>
+  </div>
+
+  <div layout="row">
+    <div flex="10">
+
+    </div>
+
+    <div ng-show="$ctrl.showPostForm" flex="80">
+      <form layout="column" name="newPostForm">
+        <md-input-container>
+          <label>Title</label>
+          <input name="title" ng-model="$ctrl.title" required>
+          <div ng-messages="newPostForm.title.$error">
+            <div ng-message="required">Title your post foo!</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Post</label>
+          <textarea name="body" ng-model="$ctrl.body" required></textarea>
+          <div ng-messages="newPostForm.body.$error">
+            <div ng-message="required">Don't just talk about it be about it!</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Author</label>
+          <input name="author" ng-model="$ctrl.author" required>
+          <div ng-messages="newPostForm.author.$error">
+            <div ng-message="required">Who you is yo‽‽‽</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Image URL</label>
+          <input name="img_url" ng-model="$ctrl.img_url" required>
+          <div ng-messages="newPostForm.img_url.$error">
+            <div ng-message="required">Where's your pic G‽‽‽</div>
+          </div>
+        </md-input-container>
+
+        <md-button ng-click="$ctrl.postNew()" class="md-primary">Post That shit!</md-button>
+
+      </form>
+    </div>
+
+    <div flex="10">
+
+    </div>
+  </div>
+
+  <div layout="row" ng-repeat="post in $ctrl.posts | filter:search:strict | orderBy:$ctrl.orderBy" >
+
+    <div flex="10">
+
+    </div>
+
+    <md-card flex="80" layout="row">
+      <img ng-src="{{post.img_url}}" class="postImg md-card-image" alt="image caption">
+      <div layout="column">
+
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">{{post.title}}   |
+
+              <md-button ng-click="$ctrl.removeProp(post.id)" class="md-icon-button" aria-label="Custom Icon Button">
+                <i class="material-icons">vertical_align_bottom</i>
+                <!-- <i class="material-icons">vertical_align_top</i> {{post.props}} -->
+              </md-button>
+
+              <md-button ng-click="$ctrl.addProp(post.id)" class="md-icon-button" aria-label="Custom Icon Button">
+                <i class="material-icons">vertical_align_top</i>
+                <!-- <i class="material-icons">vertical_align_top</i> {{post.props}} -->
+              </md-button>
+
+              {{post.props}}
+              <ng-pluralize count="post.props"
+                when="{'1': 'Prop',
+                      'other': 'Props'}">
+              </ng-pluralize>
+            </span>
+            <span class="md-subhead">{{post.author}}</span>
+          </md-card-header-text>
+        </md-card-header>
+
+        <md-card-content>
+          <p>
+           {{post.post}}
+          </p>
+        </md-card-content>
+
+        <md-card-footer>
+          <span><span am-time-ago="post.timeStamp"></span> |
+              <md-button ng-click="$ctrl.toggleComments(post.id)" class="md-icon-button" aria-label="Custom Icon Button">
+                <i class="material-icons">comment</i>
+              </md-button>
+              {{post.comments.length}}
+              <ng-pluralize ng-click="$ctrl.toggleComments(post.id)" count="post.comments.length"
+                when="{'1': 'comment',
+                      'other': 'comments'}">
+              </ng-pluralize>
+          </span>
+          <md-list ng-show="post.displayComments">
+            <md-list-item class="md-2-line" ng-repeat="comment in post.comments track by $index">
+              <div class="md-list-item-text">
+                <p>{{comment}}</p>
+              </div>
+            </md-list-item>
+            <md-list-item>
+              <md-input-container>
+                <input type="text" ng-model="$ctrl.newComment">
+              </md-input-container>
+            </md-list-item>
+            <md-list-item>
+              <md-button ng-click="$ctrl.addComment(post.id)" class="md-primary">Post Comment</md-button>
+            </md-list-item>
+          </md-list>
+
+        </md-card-footer>
+
+      </div>
+    </md-card>
+
+    <div flex="10">
+
+    </div>
+
+  </div>
+
+</main>
