@@ -7,19 +7,19 @@
       controller: PostCtrl
     });
 
+
+
+
+
+
+
   function  PostCtrl() {
         const vm = this
 
-        vm.addProp = addProp
-        vm.removeProp = removeProp
-        vm.toggleComments = toggleComments
-        vm.addComment = addComment
         vm.togglePostForm = togglePostForm
         vm.postNew = postNew
         vm.showPostForm = false
-        vm.orderBy = 'date'
-
-        vm.newComment = ''
+        vm.orderBy = '-timeStamp'
 
         vm.posts = [
           {
@@ -91,29 +91,8 @@
           newPost.props = 0
           newPost.comments = []
 
-          console.log(newPost.timeStamp);
-          console.log(vm.posts);
           vm.posts.push(newPost)
           togglePostForm()
-        }
-
-        function addProp(post_id) {
-          vm.posts[post_id].props += 1
-        }
-
-        function removeProp(post_id) {
-          if (!!vm.posts[post_id].props) {
-            vm.posts[post_id].props -= 1
-          }
-        }
-
-        function toggleComments(post_id) {
-          vm.posts[post_id].displayComments = !vm.posts[post_id].displayComments
-        }
-
-        function addComment(post_id) {
-          vm.posts[post_id].comments.push(vm.newComment)
-          vm.newComment = ''
         }
     }
 }())
