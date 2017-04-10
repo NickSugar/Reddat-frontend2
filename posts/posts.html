@@ -38,7 +38,7 @@
     </div>
 
     <div ng-show="$ctrl.showPostForm" flex="80">
-      <form layout="column" name="newPostForm">
+      <form ng-submit="$ctrl.postNew()" layout="column" name="newPostForm">
         <md-input-container>
           <label>Title</label>
           <input name="title" ng-model="$ctrl.title" required>
@@ -71,7 +71,7 @@
           </div>
         </md-input-container>
 
-        <md-button ng-click="$ctrl.postNew()" class="md-primary">Post That shit!</md-button>
+        <md-button type="submit" class="md-primary">Post That shit!</md-button>
 
       </form>
     </div>
