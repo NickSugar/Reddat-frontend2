@@ -46,7 +46,7 @@
             <i class="material-icons">comment</i>
           </md-button>
           {{$ctrl.post.comments.length}}
-          <ng-pluralize ng-click="$ctrl.toggleComments($ctrl.post.id)" count="$ctrl.post.comments.length"
+          <ng-pluralize ng-click="$ctrl.toggleComments($ctrl.post)" count="$ctrl.post.comments.length"
             when="{'1': 'comment',
                   'other': 'comments'}">
           </ng-pluralize>
