@@ -6,6 +6,5 @@
       'ui.router',
       'ngMaterial',
       'angularMoment'
-      // 'moment'
     ])
 })()
