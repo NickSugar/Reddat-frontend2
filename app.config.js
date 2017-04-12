@@ -10,14 +10,10 @@
           url: '/',
           template: '<posts-page></posts-page>'
         })
-        // .state('recipe', {
-        //   url: '/recipe/{recipeID}',
-        //   template: '<recipe-page></recipe-page>'
-        // })
-        // .state('edit', {
-        //   url: '/edit',
-        //   template: '<edit-recipe></edit-recipe>'
-        // })
+        .state('editPost', {
+          url: '/posts/{post_id}/edit',
+          template: '<edit-post></edit-post>'
+        })
         $urlRouterProvider.otherwise('/')
         // $locationProvider.html5Mode(true)
     });

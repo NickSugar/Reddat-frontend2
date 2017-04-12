@@ -9,16 +9,16 @@
       <div layout="row" flex="66">
         <md-input-container>
           <label>Filter</label>
-          <input name="filter" ng-model="s.title">
+          <input name="filter" ng-model="search.title">
         </md-input-container>
 
         <md-input-container>
 
 
           <md-select ng-model="$ctrl.orderBy" placeholder="Sort by Date" class="md-no-underline">
-            <md-option value="-timeStamp">Sort by Date</md-option>
+            <md-option value="-created_at">Sort by Date</md-option>
             <md-option value="title">Sort by Title</md-option>
-            <md-option value="-props">Sort by Props</md-option>
+            <md-option value="-vote_count">Sort by Props</md-option>
           </md-select>
 
         </md-input-container>
@@ -65,7 +65,7 @@
 
         <md-input-container>
           <label>Image URL</label>
-          <input name="img_url" ng-model="$ctrl.img_url" required>
+          <input name="img_url" ng-model="$ctrl.image_url" required>
           <div ng-messages="newPostForm.img_url.$error">
             <div ng-message="required">Where's your pic G‽‽‽</div>
           </div>
@@ -81,7 +81,21 @@
     </div>
   </div>
 
-  <div ng-repeat="post in $ctrl.posts | filter:s:strict | orderBy:$ctrl.orderBy" >
+  <div layout="row">
+    <div flex="10">
+
+    </div>
+
+    <div ng-show="$ctrl.showProgress" flex="80" layout="row" layout-align="center center">
+      <md-progress-circular md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div layout="10">
+
+    </div>
+  </div>
+
+  <div ng-repeat="post in $ctrl.posts | filter:search:strict | orderBy:$ctrl.orderBy" >
     <post post="post"></post>
   </div>
 

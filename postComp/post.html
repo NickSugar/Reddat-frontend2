@@ -9,7 +9,12 @@
   </div>
 
   <md-card flex="80" layout="row">
-    <img ng-src="{{$ctrl.post.img_url}}" class="postImg md-card-image" alt="image caption">
+
+    <div layout="column" layout-align="center center">
+      <img ng-src="{{$ctrl.post.image_url}}" class="postImg md-card-image" alt="image caption">
+      <a ui-sref="editPost({post_id: $ctrl.post.id})"><md-button class="md-primary">Edit Post</md-button></a>
+    </div>
+
     <div layout="column">
 
       <md-card-header>
@@ -26,8 +31,8 @@
               <!-- <i class="material-icons">vertical_align_top</i> {{post.props}} -->
             </md-button>
 
-            {{$ctrl.post.props}}
-            <ng-pluralize count="$ctrl.post.props"
+            {{$ctrl.post.vote_count}}
+            <ng-pluralize count="$ctrl.post.vote_count"
               when="{'1': 'Prop',
                     'other': 'Props'}">
             </ng-pluralize>
@@ -38,12 +43,12 @@
 
       <md-card-content>
         <p>
-         {{$ctrl.post.post}}
+         {{$ctrl.post.body}}
         </p>
       </md-card-content>
 
       <md-card-footer>
-        <span><span am-time-ago="$ctrl.post.timeStamp"></span> |
+        <span><span am-time-ago="$ctrl.post.created_at"></span> |
             <md-button ng-click="$ctrl.toggleComments($ctrl.post)" class="md-icon-button" aria-label="Custom Icon Button">
               <i class="material-icons">comment</i>
             </md-button>
@@ -56,7 +61,7 @@
         <md-list ng-show="$ctrl.post.displayComments">
           <md-list-item class="md-2-line" ng-repeat="comment in $ctrl.post.comments track by $index">
             <div class="md-list-item-text">
-              <p>{{comment}}</p>
+              <p>{{comment.content}}</p>
             </div>
           </md-list-item>
           <md-list-item>

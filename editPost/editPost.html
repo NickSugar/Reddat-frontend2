@@ -1,0 +1,48 @@
+<main layout="row">
+  <div flex="10">
+
+  </div>
+
+  <div flex="80">
+    <form ng-submit="$ctrl.updatePost()" layout="column" name="updatePostForm">
+      <md-input-container>
+        <label>Title</label>
+        <input name="title" ng-model="$ctrl.post.title" required>
+        <div ng-messages="updatePostForm.title.$error">
+          <div ng-message="required">Title your post foo!</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Post</label>
+        <textarea name="body" ng-model="$ctrl.post.body" required></textarea>
+        <div ng-messages="updatePostForm.body.$error">
+          <div ng-message="required">Don't just talk about it be about it!</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Author</label>
+        <input name="author" ng-model="$ctrl.post.author" required>
+        <div ng-messages="updatePostForm.author.$error">
+          <div ng-message="required">Who you is yo‽‽‽</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Image URL</label>
+        <input name="img_url" ng-model="$ctrl.post.image_url" required>
+        <div ng-messages="updatePostForm.img_url.$error">
+          <div ng-message="required">Where's your pic G‽‽‽</div>
+        </div>
+      </md-input-container>
+
+      <md-button type="submit" class="md-primary">Update That shit!</md-button>
+
+    </form>
+  </div>
+
+  <div flex="10">
+
+  </div>
+</main>
